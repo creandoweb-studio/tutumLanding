@@ -1,0 +1,109 @@
+@import
+'./utilities';
+/* You can add global styles to this file, and also import other style files */
+
+*{
+  $font: 'Montserrat', sans-serif;
+$ftQuick: 'Quicksand', sans-serif;
+$font-size: 16px;
+}
+
+
+html {
+  box-sizing: border-box;
+  font-family: $font;
+  font-size: $font-size;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+a{
+  list-style: none;
+  text-decoration: none
+}
+img{
+  display:block;
+}
+
+
+// ================================================================
+// =========================== MENU ===============================
+// ================================================================
+
+
+@mixin borderRadius ($dir){
+  @if $dir == left {
+    border-radius: 50px 0 0 50px;
+  }
+  @if $dir == right {
+    border-radius: 0 50px 50px 0;
+  }
+  @if $dir == top {
+    border-radius: 50px 50px 0 0;
+  }
+  @if $dir == bottom {
+    border-radius: 0 0 50px 50px;
+  }
+  @if $dir == complete {
+    border-radius: 50px;
+  }
+  @if $dir == none {
+    border-radius: 0;
+  }
+}
+@mixin styleMenu ($style) {
+  @if $style == morphSoft {
+    backdrop-filter: blur(8px);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  }
+  @if $style == morphHard {
+    backdrop-filter: blur(50px);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  }
+  @if $style == morphMedium {
+    backdrop-filter: blur(15px);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  }
+  @if $style == morphUnique {
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0);
+  }
+  @if $style == transparent {
+    //backdrop-filter: none;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  }
+  @if $style == none {
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+}
+@mixin centerFlex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+*{
+  scroll-behavior: smooth;
+}
+
+
+
+
+@media (max-width: 991px){
+
+}
+
+
+
+

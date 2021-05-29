@@ -1,0 +1,876 @@
+@import '../../../utilities';
+
+
+// ================================================================
+// =========================== MENU ===============================
+// ================================================================
+
+*{
+  scroll-behavior: smooth;
+}
+
+
+
+.hamburger:focus {
+  outline: 0;
+  border: 0;
+}
+
+.hamburger-inner,
+.hamburger-inner:after,
+.hamburger-inner:before { background-color: $hamburger-color2; }
+
+.u-afterFixed { padding-top: $header-height; }
+
+.Header {
+  position: fixed;
+  z-index: 10000;
+  width: 100%;
+  height: $header-height;
+  transition: all .3s ease-out;
+  background-color: $header-bg-op-0;
+  transition: background-color .3s linear;
+
+  &.is-active {
+    background-color: $header-bg-op-1;
+  }
+
+  &-container {
+    margin: auto;
+    max-width: $header-container-width;
+    display: grid;
+    grid-template: {
+      columns: repeat(3, 1fr);
+      rows: $header-height, auto;
+      areas: $header-area
+             'panel panel panel';
+    }
+  }
+}
+
+.Logo {
+  // background-color: red;
+  opacity: 0;
+  z-index: 10001;
+  grid-area: logo;
+  justify-self: $logo-position;
+  @include centerFlex;
+  transition: opacity .3s ease-in;
+  &.is-active{
+    opacity: 1;
+  }
+
+  &-link {
+    display: block;
+    width: $logo-width;
+    height: $logo-height;
+    text-indent: -9999px;
+    background: {
+      image: url($logo-url);
+      size: $logo-bg-size;
+      repeat: no-repeat;
+      position: center;
+    }
+  }
+}
+
+.Panel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  overflow-y: auto;
+  grid-area: panel;
+  background-color: $header-bg-op-2;
+  // background-color: violet;
+  transition: transform .3s ease-out;
+  @include panel-direction(left);
+
+  &-button {
+    z-index: 999;
+    grid-area: hamburger;
+    justify-self: $hamburger-position;
+  }
+}
+.Menu {
+  margin-top: calc(#{$header-height} + 2rem);
+
+   &-listItem {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    list-style: none;
+  }
+
+  &-link {
+    display: block;
+    padding: 1rem 1.5rem;
+    font: {
+      weight: 500;
+      size: 1.5rem;
+    }
+    color: $baseredes;
+    text-decoration: none;
+    transition: all .3s ease-out;
+  }
+
+  &-link:hover {
+    color: $primario;
+    text-transform: uppercase;
+    transition: all .5s ease-out;
+    background-color: $color;
+  }
+}
+
+@media screen and (min-width: 64em) {
+  .Header {
+    background-color: $header-bg-op-2;
+    &-container {
+      grid-template: {
+        columns: auto 1fr;
+        rows: $header-height;
+        areas: 'logo panel';
+      }
+    }
+  }
+
+  .Logo {
+    // background-color: green;
+    // justify-self: center;
+    // display: flex;
+    // justify-content: center;
+    align-self: start;
+    // align-items: center;
+    // align-content: center;
+  }
+
+  .Panel {
+    position: static;
+    overflow-y: visible;
+    transform: translate(0, 0);
+    background-color: transparent;
+
+    &-button { display: none; }
+  }
+
+  .Menu {
+    margin-top: 0;
+
+    &-listItem {
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    &-link { border-top: medium solid transparent; }
+
+    &-link:hover {
+      border-top: medium solid $primario;
+      background-color: transparent;
+    }
+  }
+}
+
+
+
+// #########################################################
+// codigo de sitio
+// #########################################################
+
+
+// -------------------------- grid para el encabezado --------------------------
+.hero{
+  .hero{
+    height: 100vh;
+    @include gridBase;
+    &__logo{
+      grid-column: 2 / 12;
+      grid-row: 2 / 4;
+    }
+    &__phrase{
+      grid-column: 2 / 12;
+      grid-row: 4 / 5;
+    }
+    &__register{
+      grid-column: 2 / 12;
+      grid-row: 7 / 13;
+    }
+  }
+
+}
+
+// -------------------------- estilo de encabezado --------------------------
+.hero{
+    @include bgImages('hero_360.png', cover, center);
+    &__logo{
+      @include bgImages('logoNegativo.svg', contain, center )
+    }
+    &__phrase{
+      @include centerFlex;
+      color:$baseredes;
+
+    }
+    &__register{
+      text-align: center;
+      @include centerFlex;
+      flex-wrap: wrap;
+      .subtitle{
+        padding: 4rem 0 0 0;
+        font-size: 1.2rem;
+      }
+      .apps{
+        width: 100%;
+        @include centerFlex;
+        flex-wrap: wrap;
+      }
+
+    }
+  }
+  .googlePlay, .appStore{
+    height: 110px;
+    width: 110px;
+    margin: -.5rem 1rem;
+  }
+  .googlePlay{
+    @include bgImages('google.png', contain, center);
+  }
+  .appStore{
+    @include bgImages('app.png', contain, center)
+  }
+
+  // -------------------------- estilo de cuerpo --------------------------
+
+  .main{
+  &__plus{
+    &--options{
+      @include centerFlex;
+      flex-wrap: wrap;
+      .optionContainer{
+        text-align: center;
+        height: 300px;
+        width: 300px;
+        margin: 1rem;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        .icon{
+          margin: 1rem 0;
+          padding: 1rem 0;
+          height: 40%;
+          width: 100%;
+        }
+        .title{
+          width: 100%;
+          h2{
+            font-size: 1.5rem;
+          }
+        }
+        .text{
+          width: 100%;
+        }
+      }
+      .op1 .icon{
+        @include bgImages('char1.png', contain, center);
+      }
+      .op2 .icon{
+        @include bgImages('char2.png',contain,center);
+      }
+      .op3 .icon{
+        @include bgImages('char3.png', contain, center)
+      }
+    }
+
+  }
+  &__registerUser{
+    height: 80vh;
+    @include bgImages('invit_360.png', cover, top);
+    @include gridBase;
+    &--content{
+      grid-column: 2 / 12;
+      grid-row: 1 / 12;
+      @include centerFlex;
+      flex-wrap: wrap;
+      text-align: center;
+      .title{
+        width: 100%;
+        height: 2px;
+        margin: .5rem 0;
+        h2{
+          color:$secundario
+        }
+
+      }
+      .text{
+        width: 100%;
+        padding: .5rem 0;
+        p{
+          color: #fff;
+        }
+      }
+
+      .action{
+        width: 90%;
+        @include centerFlex;
+        flex-wrap: wrap;
+        &__icon{
+          @include bgImages('icono.svg', contain, center);
+          box-shadow: 4px 4px 8px 0px rgba(231,166,26,.5);
+          width: 70px;
+          height: 70px;
+        }
+        &__call{
+          width: 100%;
+          padding: 1rem 0;
+          p{
+            color:$secundario;
+            font-size: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+  &__providerDownload{
+    @include bgImages('desc_360.png', contain, bottom);
+    @include gridBase;
+    &--wrapper{
+      grid-column: 2 / 12;
+      grid-row: 2 / 12;
+      @include centerFlex;
+      flex-wrap: wrap;
+      .provider{
+        @include centerFlex;
+        flex-wrap: wrap;
+        text-align: center;
+        margin: 1.5rem 0;
+        &__title{
+          padding: 1rem 0;
+          h2{
+            font-size: 2rem;
+          }
+        }
+        &__action{
+          @include centerFlex;
+          flex-wrap: wrap;
+          margin: 1rem 0 0 0;
+          .icon{
+            @include bgImages('icono.svg', contain, center);
+            box-shadow: 4px 4px 8px 0px rgba(231,166,26,.5);
+            width: 70px;
+            height: 70px;
+          }
+          .call{
+            width: 100%;
+            h3{
+              font-size: 1.5rem;
+              color: $primario;
+            }
+          }
+        }
+      }
+      .download{
+        @include centerFlex;
+        flex-wrap: wrap;
+        margin: 0 1.5rem;
+        &__title{
+          text-align: center;
+          margin: 1rem 0;
+          h2{
+            font-size: 1.5rem;
+            color:$secundario;
+          }
+        }
+        &__content{
+          text-align: justify;
+          margin: 1rem 0;
+        }
+        &__access{
+          width: 100%;
+          @include centerFlex;
+          flex-wrap: wrap;
+          .googlePlay, .appStore{
+            width: 70%;
+            margin: -.5rem 0;
+          }
+        }
+      }
+
+    }
+  }
+  &__contact{
+    @include centerFlex;
+    flex-wrap: wrap;
+    &--title{
+      width: 100%;
+      text-align: center;
+      padding: 3rem 0;
+    }
+    &--form{
+      @include centerFlex;
+      flex-wrap: wrap;
+      .inputText{
+        width: 300px;
+        margin:0.5rem 0;
+        padding: .8rem;
+        border-radius: 40px;
+        text-decoration: none;
+      }
+      .inputUser{
+        padding: 1.5rem;
+      }
+      .inputProvider{
+        padding: 1.5rem;
+      }
+      .btn{
+        padding: 1.5rem;
+        .inputBtn{
+          padding: .8rem 3rem;
+          border-radius: 40px;
+          text-decoration: none;
+          @include gradient($grPrimario, $grSecundario);
+          box-shadow:0 0 12px 1px $sbSecundario;
+          color: #fff;
+        }
+      }
+
+    }
+    .inputNote{
+      margin: 1rem 2rem;
+      font-size: 0.8rem;
+      font-style: italic;
+    }
+  }
+}
+
+// -------------------------- estilo de pie de página --------------------------
+.footer{
+  @include bgImages('footer_420.png', cover, center);
+  height: 40vh;
+  @include centerFlex;
+  &__logo{
+    @include bgImages('logoNegativo.svg', contain, center);
+    height: 60%;
+    width: 60%;
+  }
+}
+
+
+
+// ================================================================
+// ======================= MEDIA QUERIES ==========================
+// ================================================================
+// ================================================================
+// ======================= 480 => 599 ===========================
+// ================================================================
+@include mQ(smallS){
+
+
+  // -------------------------- grid para el encabezado --------------------------
+.hero{
+  .hero{
+    height: 100vh;
+    @include gridBase;
+    &__logo{
+      grid-column: 2 / 12;
+      grid-row: 2 / 4;
+    }
+    &__phrase{
+      grid-column: 2 / 12;
+      grid-row: 4 / 5;
+    }
+    &__register{
+      grid-column: 2 / 12;
+      grid-row: 8 / 13;
+    }
+  }
+
+}
+
+// -------------------------- estilo de encabezado --------------------------
+.hero{
+    &__logo{
+    }
+    &__phrase{
+      @include centerFlex;
+      text-align: center;
+
+    }
+  }
+  .googlePlay, .appStore{
+    height: 100px;
+    width: 200px;
+    margin: 0 1rem;
+  }
+
+  // -------------------------- estilo de cuerpo --------------------------
+
+  .main{
+  &__registerUser{
+    height: 80vh;
+    @include bgImages('invit_420.png', cover, top);
+  }
+  &__providerDownload{
+    @include bgImages('desc_600.png', contain, bottom);
+    &--wrapper{
+      .provider{
+        margin: 0;
+      }
+      .download{
+        &__content{
+          margin: 1rem 0;
+        }
+        &__access{
+          .googlePlay, .appStore{
+            width: 60%;
+          }
+        }
+      }
+
+    }
+  }
+}
+
+// -------------------------- estilo de pie de página --------------------------
+.footer{
+  @include bgImages('footer_420.png', cover, center);
+}
+
+}
+// ================================================================
+// ======================= 600 => 759 ===========================
+// ================================================================
+@include mQ(mediumS){
+
+
+  // -------------------------- grid para el encabezado --------------------------
+.hero{
+  .hero{
+    &__register{
+      grid-row: 8 / 13;
+    }
+  }
+
+}
+
+// -------------------------- estilo de encabezado --------------------------
+.hero{
+    @include bgImages('hero_600.png', cover, center);
+  }
+
+  // -------------------------- estilo de cuerpo --------------------------
+
+  .main{
+  &__registerUser{
+    height: 80vh;
+    @include bgImages('invit_600.png', cover, top);
+  }
+  &__providerDownload{
+    @include bgImages('desc_760.png', contain, bottom);
+    &--wrapper{
+      .download{
+        &__content{
+          margin: 1rem 3rem;
+        }
+        &__access{
+          width: 80%;
+          .googlePlay, .appStore{
+            width: 60%;
+            margin: .5rem 0;
+          }
+        }
+      }
+    }
+  }
+  &__contact{
+    &--form{
+      .inputText{
+        width: 400px;
+      }
+    }
+  }
+}
+
+// -------------------------- estilo de pie de página --------------------------
+.footer{
+  @include bgImages('footer_600.png', cover, center);
+  height: 50vh;
+}
+
+
+}
+// ================================================================
+// ======================= 760 => 919 ===========================
+// ================================================================
+@include mQ(wideS){
+
+
+// -------------------------- estilo de encabezado --------------------------
+.hero{
+    @include bgImages('hero_760.png', cover, center);
+  }
+
+  // -------------------------- estilo de cuerpo --------------------------
+
+  .main{
+  &__registerUser{
+    @include bgImages('invit_760.png', cover, top);
+    &--content{
+      grid-row: 3 / 12;
+      .text{
+        margin: 0 5rem;
+      }
+    }
+  }
+  &__providerDownload{
+    @include bgImages('desc_760.png', contain, bottom);
+    &--wrapper{
+      .download{
+        &__title{
+          margin: 1rem 2rem;
+        }
+        &__content{
+          margin: 1.5rem 6rem 2rem 6rem;
+        }
+        &__access{
+          width: 70%;
+          .googlePlay, .appStore{
+            width: 60%;
+          }
+        }
+      }
+    }
+  }
+  &__contact{
+    &--form{
+      .inputText{
+        width: 400px;
+      }
+      .btn{
+        width: 100%;
+        text-align:center;
+      }
+    }
+  }
+}
+
+// -------------------------- estilo de pie de página --------------------------
+.footer{
+  @include bgImages('footer_760.png', cover, center);
+  height: 50vh;
+}
+
+}
+// ================================================================
+// ======================= 920 => 1199 ===========================
+// ================================================================
+@include mQ(largeS){
+
+  // -------------------------- grid para el encabezado --------------------------
+.hero{
+  .hero{
+    &__logo{
+      grid-column: 2 / 7;
+    }
+    &__phrase{
+      grid-column: 2 / 7;
+    }
+  }
+}
+
+// -------------------------- estilo de encabezado --------------------------
+.hero{
+    @include bgImages('hero_920.png', cover, center);
+  }
+
+  // -------------------------- estilo de cuerpo --------------------------
+
+  .main{
+  &__registerUser{
+    @include bgImages('invit_920.png', contain, center);
+    &--content{
+      grid-column: 4 / 12;
+      .text{
+        margin: 0 4rem;
+      }
+    }
+  }
+  &__providerDownload{
+    @include bgImages('desc_920.png', contain, bottom);
+    &--wrapper{
+      .download{
+        &__access{
+          width: 50%;
+        }
+      }
+    }
+  }
+}
+
+// -------------------------- estilo de pie de página --------------------------
+.footer{
+  @include bgImages('footer_920.png', cover, center);
+}
+
+
+}
+// ================================================================
+// ======================= 1200 => 1399 ===========================
+// ================================================================
+@include mQ(xlS){
+
+  // -------------------------- grid para el encabezado --------------------------
+.hero{
+  .hero{
+    &__logo{
+      grid-column: 2 / 9;
+      grid-row: 3 / 5;
+    }
+    &__phrase{
+      grid-column: 2 / 9;
+      grid-row: 5 / 6;
+    }
+    &__register{
+      grid-column: 2 / 9;
+      grid-row: 9 / 13;
+    }
+  }
+
+}
+
+// -------------------------- estilo de encabezado --------------------------
+.hero{
+    @include bgImages('hero_1200.png', cover, center);
+  }
+
+  // -------------------------- estilo de cuerpo --------------------------
+
+  .main{
+  &__registerUser{
+    height: 90vh;
+    @include bgImages('invit_1200.png', cover, center);
+    &--content{
+      grid-column: 6 / 12;
+      .text{
+        margin: 0 5rem;
+      }
+    }
+  }
+  &__providerDownload{
+    @include bgImages('desc_1366.png', cover, bottom);
+    height: 100vh;
+    // @include gridBase;
+    &--wrapper{
+      //background-color: firebrick;
+      grid-column: 3 / 11;
+      .provider{
+        margin: 1rem;
+      }
+      .download{
+        &__title{
+          margin: 1rem 3rem;
+        }
+        &__content{
+          color:$baseredes;
+          margin: 0 6rem;
+        }
+        &__access{
+          width: 40%;
+        }
+      }
+    }
+  }
+}
+
+// -------------------------- estilo de pie de página --------------------------
+.footer{
+  @include bgImages('footer_1366.png', cover, center);
+  height: 70vh;
+  &__logo{
+    height: 40%;
+    width: 40%;
+  }
+}
+
+}
+// ================================================================
+// ======================= 1400 =>  ===========================
+// ================================================================
+@include mQ(opS){
+// -------------------------- grid para el encabezado --------------------------
+.hero{
+  .hero{
+    &__logo{
+      grid-row: 3 / 6;
+    }
+    &__phrase{
+      grid-row: 6 / 7;
+    }
+    &__register{
+      grid-row: 8 / 13;
+    }
+  }
+
+}
+
+// -------------------------- estilo de encabezado --------------------------
+.hero{
+    @include bgImages('hero_1366.png', cover, top left);
+  }
+  .googlePlay, .appStore{
+    height: 150px;
+    width: 300px;
+  }
+
+  // -------------------------- estilo de cuerpo --------------------------
+
+  .main{
+  &__registerUser{
+    height: 80vh;
+    @include bgImages('invit_1366.png', cover, top center);
+    &--content{
+      grid-column: 6 / 12;
+      grid-row: 4 / 11;
+      .title{
+        margin: 1rem 0 1.5rem 0;
+      }
+      .text{
+        margin: 1rem 0;
+        padding: 1rem 0;
+      }
+
+      .action{
+        width: 100%;
+      }
+    }
+  }
+  &__providerDownload{
+    @include bgImages('desc_1366.png', contain, bottom);
+    &--wrapper{
+      grid-column: 4 / 10;
+      .provider{
+        margin: 1.5rem 0;
+        &__action{
+          margin: 1.5rem 0 0 0;
+        }
+      }
+      .download{
+        margin: 5rem 3rem 0 3rem;
+        &__title{
+          margin: 1rem;
+        }
+        &__content{
+          margin: 1rem .5rem;
+        }
+        &__access{
+          width: 80%;
+          flex-wrap: nowrap;
+          .googlePlay, .appStore{
+            width: 35%;
+            margin:0 1rem;
+          }
+        }
+      }
+
+    }
+  }
+}
+}

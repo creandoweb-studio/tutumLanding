@@ -1,0 +1,166 @@
+$font: 'Open Sans', sans-serif;
+$ftRoboto: 'Roboto', sans-serif;
+$font-size: 16px;
+
+$fsBase:16px;
+
+//alto general
+$hBase:100vh;
+
+//fuentes
+// $ftIncosolata:'Inconsolata', monospace;
+// $ftyanone:'Yanone Kaffeesatz', sans-serif;
+// $ftRaleway:'Raleway', sans-serif;
+
+// grosor
+$ligth:300;
+$normal:400;
+$medium:500;
+$bold:700;
+
+//Familia de fuentes
+$ftroboto: 'Roboto', sans-serif;
+$ftOswald: 'Oswald', sans-serif;
+
+// Variables de color
+// $color     : rgb(44, 43, 43);
+$color      : #1b1a1c;
+$txtResalte : #675e66;
+$baseredes  : #fdfbfd;
+$primario   : #222222;
+// $primario: #cd6be6;
+$primario2  : #222;
+$primario3  : #222;
+$secundario : #F29E25;
+$secundario2: #FDBB11;
+$secundario3: #FCD015;
+$resalte    : #91ae45;
+$clAlterno  : #dc85d3;
+
+$grPrimario: #fcd015;
+$grSecundario: #f27025;
+$sbSecundario:rgba(242, 112, 37, 0.8);
+
+
+$header-bg-op-0:  rgba(27, 26, 28, 0);
+$header-bg-op-1: rgba(27, 26, 28, 1);
+$header-bg-op-2: rgba(27, 26, 28, 0.9);
+$header-color: $baseredes;
+$header-height: 4rem;
+$header-container-width: 1200px;
+
+// $logo-url: imgPath('escudo.png');
+$logo-url: "../../../assets/images/logo.png";
+$logo-width: 4rem;
+$logo-height: 4rem;
+$logo-bg-size: 4rem;
+
+// $header-area: '. logo hamburger'; // 'logo . hamburger' | '. logo hamburger' | 'hamburger . logo' | 'hamburger logo .'
+$header-area: 'hamburger logo .';
+// $logo-position: start; //start | center | end
+$logo-position: center;
+// $hamburger-position: end; //start | end
+$hamburger-position: start;
+
+$hamburger-color: $primario;
+$hamburger-color2:$secundario;
+
+@mixin panel-direction($dir) {
+  @if $dir == left {
+    transform: translateX(-110%);
+    &.is-active { transform: translateX(0); }
+  } @else if $dir == right {
+    transform: translateX(100%);
+    &.is-active { transform: translateX(0); }
+  } @else if $dir == top {
+    transform: translateY(-100%);
+    &.is-active { transform: translateY(0); }
+  } @else if $dir == bottom {
+    transform: translateY(100%);
+    &.is-active { transform: translateY(0); }
+  }
+}
+
+
+
+
+$xsScreen:      320px; //mobile default - pequeño (360 * 640) 23% de uso - variacion inferior (320 * 479)
+$smallScreen :  480px; //landscape mobile (480 * 599)
+$mediumScreen:  600px; // (600 * 769)
+$wideScreen  :  760px; // tablet default (768 * 1024)
+$largeScreen :  920px;
+$xlScreen:      1200px; // portatil medio (1366 * 768) 12% de uso
+$opScreen:      1400px; // desktop default escritorio medio (1440 * 900) 3.2%
+
+@mixin bgImages ($image, $sizeImage, $positionImage){
+  //background-image: url(./images/#{$image});
+  background-image: url(../../../assets/images/#{$image});
+  background-repeat: no-repeat;
+  background-size: $sizeImage;
+  background-position: $positionImage;
+}
+
+
+//mixin de grid para los elementos padres en la maquetación
+@mixin gridBase ($col:repeat(12, 1fr), $filas:repeat(12, 1fr)) {
+    display: grid;
+    grid-template-columns: $col;
+    grid-template-rows: $filas;
+}
+@mixin centerGrid {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+@mixin centerFlex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin gradient ($from, $to){
+  background-image: linear-gradient(45deg, $from, $to);
+}
+@mixin radialGradient($from, $to) {
+  background-image: radial-gradient(center, ellipse cover, $from 0%, $to 100%);
+  background-color: $from;
+}
+
+
+
+@mixin mQ($media) {
+  @if $media==xsS {
+    @media screen and (min-width:$xsScreen) {
+      @content;
+    }
+  }
+  @else if $media==smallS {
+    @media screen and (min-width:$smallScreen) {
+      @content;
+    }
+  }
+  @else if $media==mediumS {
+    @media screen and (min-width:$mediumScreen) {
+      @content;
+    }
+  }
+  @else if $media==wideS {
+    @media screen and (min-width:$wideScreen) {
+      @content;
+    }
+  }
+  @else if $media==largeS {
+    @media screen and (min-width:$largeScreen) {
+      @content;
+    }
+  }
+  @else if $media==xlS {
+    @media screen and (min-width:$xlScreen) {
+      @content;
+    }
+  }
+  @else if $media==opS {
+    @media screen and (min-width:$opScreen) {
+      @content;
+    }
+  }
+}
